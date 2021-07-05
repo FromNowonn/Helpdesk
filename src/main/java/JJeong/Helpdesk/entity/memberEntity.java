@@ -1,9 +1,6 @@
 package JJeong.Helpdesk.entity;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
@@ -13,6 +10,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "member")
+@Builder
 public class memberEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,5 +33,4 @@ public class memberEntity {
 
     @Column(length = 50,nullable = false)
     private String memberAddress;
-
 }
