@@ -1,4 +1,4 @@
-package JJeong.Helpdesk.dto;
+package JJeong.Helpdesk.Account.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

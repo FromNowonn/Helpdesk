@@ -1,4 +1,4 @@
-package JJeong.Helpdesk.entity;
+package JJeong.Helpdesk.Account.entity;
 
 import lombok.*;
 
@@ -34,5 +34,5 @@ public class memberEntity {
 
     @Column(length = 50,nullable = false)
     private String memberAddress;
-
 }
+
