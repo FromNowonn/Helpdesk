@@ -1,6 +1,6 @@
 package JJeong.Helpdesk.dbTest;
 import JJeong.Helpdesk.Account.entity.memberEntity;
-import JJeong.Helpdesk.Account.repository.memberRepository;
+import JJeong.Helpdesk.Account.entity.memberRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

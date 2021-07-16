@@ -1,6 +1,5 @@
-package JJeong.Helpdesk.Account.repository;
+package JJeong.Helpdesk.Account.entity;
 
-import JJeong.Helpdesk.Account.entity.memberEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface memberRepository extends JpaRepository<memberEntity,Long> {

@@ -1,13 +1,15 @@
 package JJeong.Helpdesk.Account.entity;
 
+import JJeong.Helpdesk.Account.util.googleRole;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.management.relation.Role;
 import javax.persistence.*;
 
 @Getter
+@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 public class googleEntity {
@@ -26,10 +28,10 @@ public class googleEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Role role;
+    private googleRole role;
 
     @Builder
-    public googleEntity(Long googleId, String googleName, String googleEmail, Role role) {
+    public googleEntity(Long googleId, String googleName, String googleEmail, googleRole role) {
         this.googleId = googleId;
         this.googleName = googleName;
         this.googleEmail = googleEmail;
@@ -41,7 +43,7 @@ public class googleEntity {
         return this;
 
     }
-//    public String getRoleKey(){
-////        return this.role.getKey();
-//    }
+    public String getRoleKey(){
+        return this.role.getKey();
+    }
 }
