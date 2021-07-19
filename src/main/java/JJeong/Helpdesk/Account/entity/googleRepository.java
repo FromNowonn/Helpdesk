@@ -6,5 +6,5 @@ import java.util.Optional;
 
 public interface googleRepository extends JpaRepository<googleEntity, Long> {
 
-    Optional<googleEntity> findByEmail(String googleEmail);
+    Optional<googleEntity> findByGoogleEmail(String googleEmail);
 }
