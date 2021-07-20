@@ -1,15 +1,21 @@
 package JJeong.Helpdesk.config.auth;
 
+import JJeong.Helpdesk.Account.dto.OAuthAttributes;
+import JJeong.Helpdesk.Account.entity.googleEntity;
 import JJeong.Helpdesk.Account.entity.googleRepository;
+import JJeong.Helpdesk.config.auth.dto.SessionUser;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
+import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
+import java.util.Collections;
 
 @RequiredArgsConstructor
 @Service
@@ -18,15 +24,22 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
     private final HttpSession httpSession;
 
     @Override
-    OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException{
+    public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
         OAuth2UserService<OAuth2UserRequest, OAuth2User>
                 delegate = new DefaultOAuth2UserService();
         OAuth2User oAuth2User = delegate.loadUser(userRequest);
         String registrationId = userRequest.getClientRegistration().getProviderDetails().getUserInfoEndpoint().getUserNameAttributeName();
-        
+        String userNameAttributeName = userRequest.getClientRegistration().getProviderDetails().getUserInfoEndpoint().getUserNameAttributeName();
+        OAuthAttributes attributes = OAuthAttributes.of(registrationId,userNameAttributeName,oAuth2User.getAttributes());
+        googleEntity googleentity = saveOrUpdate(attributes);
+        httpSession.setAttribute("googleEntity",new SessionUser(googleentity));
+        return new DefaultOAuth2User(Collections.singleton(new SimpleGrantedAuthority(googleentity.getRoleKey())),attributes.getAttributes(),attributes.getNameAttributeKey());
 
 
-
+    }
+    private googleEntity saveOrUpdate(OAuthAttributes attributes){
+        googleEntity googleentity = googlerepository.findByGoogleEmail(attributes.getGoogleEmail()).map(entity -> entity.update(attributes.getGoogleName(),attributes.getGooglePicture())).orElse(attributes.toEntity());
+        return googlerepository.save(googleentity);
     }
 
 }

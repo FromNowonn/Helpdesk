@@ -28,15 +28,18 @@ public class googleEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private googleRole role;
+    private googleRole googleRole;
 
     @Builder
-    public googleEntity(Long googleId, String googleName, String googleEmail, googleRole role) {
-        this.googleId = googleId;
+    public googleEntity(String googleName, String googleEmail, String picture, googleRole googleRole) {
         this.googleName = googleName;
         this.googleEmail = googleEmail;
-        this.role = role;
+        this.picture = picture;
+        this.googleRole = googleRole;
     }
+
+
+
     public googleEntity update(String name, String picture){
         this.googleName = googleName;
         this.picture = picture;
@@ -44,6 +47,6 @@ public class googleEntity {
 
     }
     public String getRoleKey(){
-        return this.role.getKey();
+        return this.googleRole.getKey();
     }
 }
