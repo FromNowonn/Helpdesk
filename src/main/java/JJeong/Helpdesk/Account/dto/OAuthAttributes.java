@@ -1,7 +1,7 @@
 package JJeong.Helpdesk.Account.dto;
 
 import JJeong.Helpdesk.Account.entity.googleEntity;
-import JJeong.Helpdesk.Account.util.googleRole;
+import JJeong.Helpdesk.Account.util.GoogleRole;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -21,7 +21,7 @@ public class OAuthAttributes {
         this.googleEmail = googleEmail;
         this.googlePicture = googlePicture;
     }
-    public static  OAuthAttributes of(String registarationId, String userNameAttributeName, Map<String,Object> attributes){
+    public static  OAuthAttributes of(String registrationId, String userNameAttributeName, Map<String,Object> attributes){
         return ofGoogle(userNameAttributeName, attributes);
     }
     private static OAuthAttributes ofGoogle(String userNameAttributeName,Map<String,Object> attributes){
@@ -36,6 +36,7 @@ public class OAuthAttributes {
         return googleEntity.builder()
                 .googleName(googleName)
                 .googleEmail(googleEmail)
-                .googleRole(googleRole.GUEST).build();
+                .googlePicture(googlePicture)
+                .googleRole(GoogleRole.GUEST).build();
     }
 }

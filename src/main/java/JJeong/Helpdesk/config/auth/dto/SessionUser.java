@@ -15,6 +15,6 @@ public class SessionUser implements Serializable {
     public SessionUser(googleEntity googleentity) {
         this.name = googleentity.getGoogleName();
         this.email = googleentity.getGoogleEmail();
-        this.picture = googleentity.getPicture();
+        this.picture = googleentity.getGooglePicture();
     }
 }

@@ -18,7 +18,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .headers().frameOptions().disable()
                 .and()
                     .authorizeRequests()//권한지정
-                    .antMatchers("/","/assets/**").permitAll()//권한 관리
+                    .antMatchers("/", "/oauth2/**", "/login/**", "/css/**", "/images/**", "/js/**", "/console/**", "/favicon.ico/**")
+                .permitAll()
                     .anyRequest().authenticated() //나머지 url
                 .and()
                     .logout()

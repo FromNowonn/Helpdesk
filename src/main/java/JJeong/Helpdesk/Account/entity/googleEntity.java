@@ -1,6 +1,6 @@
 package JJeong.Helpdesk.Account.entity;
 
-import JJeong.Helpdesk.Account.util.googleRole;
+import JJeong.Helpdesk.Account.util.GoogleRole;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,6 +12,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Table(name = "google_member")
 public class googleEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,25 +25,25 @@ public class googleEntity {
     private String googleEmail;
 
     @Column(nullable = false)
-    private String picture;
+    private String googlePicture;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private googleRole googleRole;
+    @Column(nullable = true)
+    private GoogleRole googleRole;
 
     @Builder
-    public googleEntity(String googleName, String googleEmail, String picture, googleRole googleRole) {
+    public googleEntity(String googleName, String googleEmail, String googlePicture, GoogleRole googleRole) {
         this.googleName = googleName;
         this.googleEmail = googleEmail;
-        this.picture = picture;
+        this.googlePicture = googlePicture;
         this.googleRole = googleRole;
     }
 
 
 
-    public googleEntity update(String name, String picture){
+    public googleEntity update(String googleName, String googlePicture){
         this.googleName = googleName;
-        this.picture = picture;
+        this.googlePicture = googlePicture;
         return this;
 
     }
